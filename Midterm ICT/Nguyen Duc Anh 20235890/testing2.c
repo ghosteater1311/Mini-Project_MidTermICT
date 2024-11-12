@@ -18,7 +18,10 @@ int main()
     {
         if ((arr[i] + arr[i + 1]) > max_Adjacentcy_Sum) max_Adjacentcy_Sum = arr[i] + arr[i + 1];
     }
-
-    printf("%d", max_Adjacentcy_Sum);
+    for (i = 0; i < n; i++)
+    {
+        if ((arr[i] + arr[i + 1]) == max_Adjacentcy_Sum) printf("%d and %d", arr[i], arr[i + 1]);
+    }
+    
     return 0;
 }
