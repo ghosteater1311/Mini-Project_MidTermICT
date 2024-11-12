@@ -22,7 +22,7 @@ start:
 
     loop_A:
         lb t2, 0(t0)            # Load a byte from string A into t2
-        beq t2, zero, end       # If it's null (end of string A), we're done
+        beq t2, zero, end       # If t2 = null (end of string A), jump to end
 
         # Check if t2 is a lowercase letter (between 'a' and 'z')
         li t5, 'a'              # Load 'a' into t5
@@ -40,8 +40,8 @@ start:
     
     loop_B:
         lb t4, 0(t1)              # Load a byte from string B into t4
-        beq t4, zero, check_print # If end of B, check flag
-        beq t2, t4, found_B       # If char in A matches B, set found flag
+        beq t4, zero, check_print # If t4 = null, jump to check_print
+        beq t2, t4, found_B       # If t2 = t4 (char in A similar to char in B), jump to found_B
         addi t1, t1, 1            # Move to next character in B
         j loop_B                  # Repeat loop for B
 
