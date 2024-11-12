@@ -2,7 +2,8 @@
 #include <string.h>
 #include <ctype.h>
 
-int main() {
+int main() 
+{
     char A[32], B[32];
     int found;
 
@@ -17,23 +18,28 @@ int main() {
     B[strcspn(B, "\n")] = '\0';
 
     // Iterate through each character in A
-    for (int i = 0; A[i] != '\0'; i++) {
+    for (int i = 0; A[i] != '\0'; i++) 
+    {
         char ch = A[i];
         
         // Check if the character is a lowercase letter
-        if (islower(ch)) {
+        if (islower(ch)) 
+        {
             found = 0; // Flag to check if ch is in B
 
             // Search for ch in string B
-            for (int j = 0; B[j] != '\0'; j++) {
-                if (B[j] == ch) {
+            for (int j = 0; B[j] != '\0'; j++) 
+            {
+                if (B[j] == ch) 
+                {
                     found = 1; // ch is found in B
                     break;
                 }
             }
 
             // If ch was not found in B, print it
-            if (!found) {
+            if (!found) 
+            {
                 putchar(ch);
             }
         }
