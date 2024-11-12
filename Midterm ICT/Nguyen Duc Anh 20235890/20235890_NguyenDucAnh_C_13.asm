@@ -15,7 +15,8 @@ start:
 	li a1, 32		
 	ecall			
 
-    # Set up pointers for iterating through A and B
+    init_pointer:
+    # Initialize pointers for iterating through A and B
     la t0, A              # t0 points to start of string A
     la t1, B              # t1 points to start of string B
 
@@ -26,15 +27,16 @@ start:
         # Check if t2 is a lowercase letter (between 'a' and 'z')
         li t5, 'a'              # Load 'a' into t5
         slt t6, t2, t5          # if t2 < 'a', t6 = 1 or 0
-        bne t6, zero, next_A    # If t2 < 'a', skip to next_A
+        bne t6, zero, next_A    # If t6 = 1, jump to next_A
 
         li t5, 'z'              # Load 'z' into t5
         slt t6, t5, t2          # if 'z' < t2, t6 = 1 or 0
-        bne t6, zero, next_A    # If 'z' < t2, skip to next_A
+        bne t6, zero, next_A    # If t6 = 1, jump to next_A
 
+    init_checkVal:
         # Check if character in A appears in B
         la t1, B                # Reset t1 to the start of string B
-        addi t3, zero, 0        # Clear flag (t3 = 0) to indicate not found in B
+        addi t3, zero, 0        # Set t3 = 0 to indicate not found in B
     
     loop_B:
         lb t4, 0(t1)              # Load a byte from string B into t4
@@ -44,22 +46,24 @@ start:
         j loop_B                  # Repeat loop for B
 
     found_B:
-        li t3, 1              # Set flag indicating character was found in B
+        li t3, 1              # Set t3 = 1 when found in B
 
     check_print:
-        beq t3, zero, print_char # If not found in B, print char in A
-        j next_A              # Otherwise, move to next char in A
+        beq t3, zero, print_char # If t3 = 0 means not found in B, print char in A
+        j next_A                 # Else move to next char in A
 
+    # Print the result
     print_char:
-        mv a0, t2             # Character to print
-        li a7, 11             # Syscall code for putchar
-        ecall                 # System Call
+        addi a0, t2, 0            
+        li a7, 11              
+        ecall                 
 
     next_A:
         addi t0, t0, 1        # Move to next character in A
         j loop_A              # Repeat loop for A
 
 end:
-    li a7, 10             # Syscall code for exit
-    ecall                 # Exit the program
+    # Exit the program
+    li a7, 10             
+    ecall                 
     
