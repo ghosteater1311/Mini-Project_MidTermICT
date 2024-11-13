@@ -30,7 +30,7 @@ start:
 # Prime Number Checking Algorithms:
 # Base Case: if t0 (M) = 2 -> print M
 # Even numbers > 2 basically is not the prime number -> ignore
-# 1 is the odd number but not the prime number
+# Number < 2 is not the prime number
 # To check other numbers: Start from the divisor 3 and only check odd divisors up to sqrt(t0),
 # Because any composite number greater than 2 must have at least one factor less than or equal to sqrt(t0).
 # Increse the divisor by 2 to skip even numbers.
